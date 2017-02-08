@@ -1,0 +1,213 @@
+Index: src/main/java/com/github/alexandrenavarro/javafxsample/CountryController.java
+===================================================================
+--- src/main/java/com/github/alexandrenavarro/javafxsample/CountryController.java	(revision 2273f7a45903c994419f2bdb74fa58f26c9b3967)
++++ src/main/java/com/github/alexandrenavarro/javafxsample/CountryView.java	(revision )
+@@ -1,9 +1,9 @@
+ package com.github.alexandrenavarro.javafxsample;
+ 
+-import com.google.common.collect.Lists;
+ import feign.FeignException;
+ import javafx.collections.FXCollections;
+ import javafx.collections.ObservableList;
++import javafx.scene.Parent;
+ import javafx.scene.control.TableColumn;
+ import javafx.scene.control.TableView;
+ import javafx.scene.control.cell.PropertyValueFactory;
+@@ -11,7 +11,6 @@
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Component;
+ 
+-import javax.annotation.PostConstruct;
+ import java.util.ArrayList;
+ import java.util.List;
+ 
+@@ -20,15 +19,15 @@
+  */
+ @Component
+ @Slf4j
+-public class CountryController {
++public class CountryView extends Parent {
+ 
+     private final CountryResource countryResource;
+-    private final TableView view;
++    private final TableView tableView;
+ 
+     @Autowired
+-    public CountryController(CountryResource countryResource) {
++    public CountryView(CountryResource countryResource) {
+         this.countryResource = countryResource;
+-        view = new TableView();
++        tableView = new TableView();
+ 
+         final TableColumn nameCol = new TableColumn("name");
+         final TableColumn alpha2CodeCol = new TableColumn("alpha2Code");
+@@ -43,7 +42,7 @@
+                 new PropertyValueFactory<>("alpha3Code"));
+ 
+ 
+-        view.getColumns().addAll(nameCol, alpha2CodeCol, alpha3CodeCol);
++        tableView.getColumns().addAll(nameCol, alpha2CodeCol, alpha3CodeCol);
+         List<Country> countryList = new ArrayList<>();
+         try {
+             countryList
+@@ -60,12 +59,10 @@
+         final ObservableList<Country> data =
+                 FXCollections.observableArrayList(countryList);
+ 
+-        view.setItems(data);
++        tableView.setItems(data);
+ 
+-    }
++        this.getChildren().add(tableView);
+ 
+-
+-    public TableView<String> getView() {
+-        return view;
+     }
++
+ }
+Index: src/main/java/com/github/alexandrenavarro/javafxsample/JavaFxApp.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/github/alexandrenavarro/javafxsample/JavaFxApp.java	(revision 2273f7a45903c994419f2bdb74fa58f26c9b3967)
++++ src/main/java/com/github/alexandrenavarro/javafxsample/JavaFxApp.java	(revision )
+@@ -1,21 +1,15 @@
+ package com.github.alexandrenavarro.javafxsample;
+ 
+ import javafx.application.Application;
+-import javafx.event.ActionEvent;
+-import javafx.event.EventHandler;
+-import javafx.scene.Group;
+-import javafx.scene.Scene;
+ import javafx.scene.SceneBuilder;
+ import javafx.scene.control.*;
+ import javafx.scene.layout.VBox;
+ import javafx.scene.layout.VBoxBuilder;
+ import javafx.stage.Stage;
+ import org.springframework.boot.SpringApplication;
+-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+ import org.springframework.cloud.netflix.feign.EnableFeignClients;
+ import org.springframework.context.ConfigurableApplicationContext;
+-import org.tbee.javafx.scene.layout.MigPane;
+ 
+ 
+ /**
+@@ -28,7 +22,6 @@
+ 
+     private ConfigurableApplicationContext applicationContext;
+ 
+-
+     @Override
+     public void init() throws Exception {
+         applicationContext = SpringApplication.run(getClass());
+@@ -37,18 +30,18 @@
+ 
+     @Override
+     public void start(final Stage stage) {
+-        final CountryController countryController = applicationContext.getBean(CountryController.class);
+-        final CurrencyController currencyController = applicationContext.getBean(CurrencyController.class);
++        final CountryView countryView = applicationContext.getBean(CountryView.class);
++        final CurrencyView currencyView = applicationContext.getBean(CurrencyView.class);
+         final MenuBar menuBar = new MenuBar();
+         menuBar.getMenus().addAll(
+                 MenuBuilder.create().text("Referential").items(
+                         MenuItemBuilder.create().text("Country").onAction(actionEvent -> {
+                             ((VBox) stage.getScene().getRoot()).getChildren().clear();
+-                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, countryController.getView());
++                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, countryView);
+                         }).build(),
+                         MenuItemBuilder.create().text("Currency").onAction(actionEvent -> {
+                             ((VBox) stage.getScene().getRoot()).getChildren().clear();
+-                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, currencyController.getView());
++                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, currencyView);
+                         }).build()
+                 ).build()
+         );
+Index: src/main/java/com/github/alexandrenavarro/javafxsample/CurrencyController.java
+===================================================================
+--- src/main/java/com/github/alexandrenavarro/javafxsample/CurrencyController.java	(revision 2273f7a45903c994419f2bdb74fa58f26c9b3967)
++++ src/main/java/com/github/alexandrenavarro/javafxsample/CurrencyView.java	(revision )
+@@ -1,24 +1,23 @@
+ package com.github.alexandrenavarro.javafxsample;
+ 
+-import javafx.beans.value.ObservableValue;
+ import javafx.collections.FXCollections;
+ import javafx.collections.ObservableList;
++import javafx.scene.Parent;
+ import javafx.scene.control.TableColumn;
+ import javafx.scene.control.TableView;
+-import javafx.scene.control.cell.PropertyValueFactory;
+-import javafx.util.Callback;
++import javafx.scene.layout.Pane;
+ import org.springframework.stereotype.Component;
+ 
+ /**
+  * Created by anavarro on 08/02/17.
+  */
+ @Component
+-public class CurrencyController {
++public class CurrencyView extends Pane {
+ 
+-    private final TableView view;
++    private final TableView tableView;
+ 
+-    public CurrencyController() {
+-        view = new TableView();
++    public CurrencyView() {
++        tableView = new TableView();
+         final TableColumn firstNameCol = new TableColumn("Currency");
+         final ObservableList<String> data =
+                 FXCollections.observableArrayList(
+@@ -26,13 +25,12 @@
+                         "USD"
+                 );
+ 
+-        view.getColumns().addAll(firstNameCol);
+-        view.setItems(data);
+-    }
++        tableView.getColumns().addAll(firstNameCol);
++        tableView.setItems(data);
+ 
+-    public TableView<String> getView() {
+-        return view;
++        getChildren().addAll(tableView);
+     }
++
+ 
+ 
+ }
+Index: src/main/java/com/github/alexandrenavarro/javafxsample/MainController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/github/alexandrenavarro/javafxsample/MainController.java	(revision 2273f7a45903c994419f2bdb74fa58f26c9b3967)
++++ src/main/java/com/github/alexandrenavarro/javafxsample/MainController.java	(revision )
+@@ -2,15 +2,10 @@
+ 
+ import javafx.event.ActionEvent;
+ import javafx.event.EventHandler;
+-import javafx.scene.Node;
+ import javafx.scene.control.*;
+-import javafx.scene.layout.Pane;
+ import lombok.extern.slf4j.Slf4j;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Component;
+-import org.tbee.javafx.scene.layout.MigPane;
+-
+-import javax.annotation.PostConstruct;
+ 
+ /**
+  * Created by anavarro on 08/02/17.
+@@ -22,7 +17,7 @@
+     private final MenuBar menuBar;
+ 
+     @Autowired
+-    public MainController(final CountryController countryController) {
++    public MainController(final CountryView countryView) {
+         menuBar = new MenuBar();
+         final Menu referentialMenu = new Menu("Referential");
+         final MenuItem countryMenuItem = new MenuItem("Country");

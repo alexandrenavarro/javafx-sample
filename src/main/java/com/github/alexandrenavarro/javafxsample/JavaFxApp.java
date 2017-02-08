@@ -1,21 +1,15 @@
 package com.github.alexandrenavarro.javafxsample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.SceneBuilder;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.tbee.javafx.scene.layout.MigPane;
 
 
 /**
@@ -27,11 +21,11 @@ import org.tbee.javafx.scene.layout.MigPane;
 public class JavaFxApp extends Application {
 
     private ConfigurableApplicationContext applicationContext;
-
+    private static String[] args;
 
     @Override
     public void init() throws Exception {
-        applicationContext = SpringApplication.run(getClass());
+        applicationContext = SpringApplication.run(getClass(), args);
         applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
     }
 
@@ -55,9 +49,12 @@ public class JavaFxApp extends Application {
 
 
         stage.setScene(SceneBuilder.create()
-                .root(VBoxBuilder.create().children(menuBar).build()).width(600).height(400).build());
+                .root(VBoxBuilder.create().children(menuBar).build()).width(800).height(600)
+                .build());
         stage.show();
 
+        // menu like web
+        // skins
     }
 
 
@@ -66,7 +63,8 @@ public class JavaFxApp extends Application {
         applicationContext.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] anArgs) {
+        args = anArgs;
         launch(args);
     }
 
