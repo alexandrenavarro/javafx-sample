@@ -1,17 +1,18 @@
 package com.github.alexandrenavarro.javafxsample;
 
-import com.google.common.collect.Lists;
 import feign.FeignException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,12 @@ import java.util.List;
 public class CountryController {
 
     private final CountryResource countryResource;
-    private final TableView view;
+    private final TableView tableView;
 
     @Autowired
     public CountryController(CountryResource countryResource) {
         this.countryResource = countryResource;
-        view = new TableView();
+        tableView = new TableView();
 
         final TableColumn nameCol = new TableColumn("name");
         final TableColumn alpha2CodeCol = new TableColumn("alpha2Code");
@@ -43,7 +44,7 @@ public class CountryController {
                 new PropertyValueFactory<>("alpha3Code"));
 
 
-        view.getColumns().addAll(nameCol, alpha2CodeCol, alpha3CodeCol);
+        tableView.getColumns().addAll(nameCol, alpha2CodeCol, alpha3CodeCol);
         List<Country> countryList = new ArrayList<>();
         try {
             countryList
@@ -60,12 +61,13 @@ public class CountryController {
         final ObservableList<Country> data =
                 FXCollections.observableArrayList(countryList);
 
-        view.setItems(data);
+        tableView.setItems(data);
+        tableView.autosize();
 
     }
 
-
-    public TableView<String> getView() {
-        return view;
+    public Node getView() {
+        return tableView;
     }
+
 }

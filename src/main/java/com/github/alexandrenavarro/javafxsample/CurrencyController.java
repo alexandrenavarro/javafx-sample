@@ -1,12 +1,14 @@
 package com.github.alexandrenavarro.javafxsample;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ListViewBuilder;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+import javafx.scene.layout.Pane;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,24 +17,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class CurrencyController {
 
-    private final TableView view;
+    private final ListView<String> listView;
 
     public CurrencyController() {
-        view = new TableView();
-        final TableColumn firstNameCol = new TableColumn("Currency");
+        listView = new ListView<>();
         final ObservableList<String> data =
                 FXCollections.observableArrayList(
                         "EUR",
                         "USD"
                 );
 
-        view.getColumns().addAll(firstNameCol);
-        view.setItems(data);
+        listView.setItems(data);
     }
 
-    public TableView<String> getView() {
-        return view;
+    public Node getView() {
+        return listView;
     }
-
 
 }
