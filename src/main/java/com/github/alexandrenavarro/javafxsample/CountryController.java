@@ -27,10 +27,12 @@ public class CountryController {
     private final TableView tableView;
 
     @Autowired
-    public CountryController(CountryResource countryResource) {
+    public CountryController(final CountryResource countryResource) {
         this.countryResource = countryResource;
-        tableView = new TableView();
+        this.tableView = new TableView();
 
+
+        // Init
         final TableColumn nameCol = new TableColumn("name");
         final TableColumn alpha2CodeCol = new TableColumn("alpha2Code");
         final TableColumn alpha3CodeCol = new TableColumn("alpha3Code");
@@ -47,14 +49,7 @@ public class CountryController {
         tableView.getColumns().addAll(nameCol, alpha2CodeCol, alpha3CodeCol);
         List<Country> countryList = new ArrayList<>();
         try {
-            countryList
-                    =
-//                Lists.newArrayList(
-//                        Country.builder().name("Name").alpha2Code("alpha2code").alpha3Code("alpha3Code").build(),
-//                        Country.builder().name("Name2").alpha2Code("alpha2code2").alpha3Code("alpha3Code2").build());
-
-
-                    countryResource.findCountries();
+            countryList = countryResource.findCountries();
         } catch (FeignException e) {
             log.warn("e:{}", e);
         }

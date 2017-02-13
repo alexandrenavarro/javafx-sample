@@ -1,11 +1,15 @@
 package com.github.alexandrenavarro.javafxsample;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.SceneBuilder;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+import org.controlsfx.control.StatusBar;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -18,40 +22,69 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @EnableFeignClients(basePackageClasses = {CountryResource.class})
+@Slf4j
 public class JavaFxApp extends Application {
 
     private ConfigurableApplicationContext applicationContext;
     private static String[] args;
 
+    @Autowired
+    private CountryController countryController;
+
+    @Autowired
+    private CurrencyController currencyController;
+
     @Override
     public void init() throws Exception {
-        applicationContext = SpringApplication.run(getClass(), args);
-        applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
+        this.applicationContext = SpringApplication.run(getClass(), args);
+        this.applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
     }
 
     @Override
     public void start(final Stage stage) {
-        final CountryController countryController = applicationContext.getBean(CountryController.class);
-        final CurrencyController currencyController = applicationContext.getBean(CurrencyController.class);
-        final MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(
-                MenuBuilder.create().text("Referential").items(
-                        MenuItemBuilder.create().text("Country").onAction(actionEvent -> {
-                            ((VBox) stage.getScene().getRoot()).getChildren().clear();
-                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, countryController.getView());
-                        }).build(),
-                        MenuItemBuilder.create().text("Currency").onAction(actionEvent -> {
-                            ((VBox) stage.getScene().getRoot()).getChildren().clear();
-                            ((VBox) stage.getScene().getRoot()).getChildren().addAll(menuBar, currencyController.getView());
-                        }).build()
-                ).build()
-        );
-
-
+        setUserAgentStylesheet(STYLESHEET_MODENA);
+        final StatusBar statusBar = new StatusBar();
+        statusBar.setText("Nothing in progress");
+        statusBar.setProgress(1);
         stage.setScene(SceneBuilder.create()
-                .root(VBoxBuilder.create().children(menuBar).build()).width(800).height(600)
-                .build());
+                .root(BorderPaneBuilder.create()
+                        .top(HBoxBuilder.create()
+                                .children(
+                                        LabelBuilder.create()
+                                                .text("Sales").build(),
+                                        TextFieldBuilder.create().build(),
+                                        LabelBuilder.create()
+                                                .text("Trader").build(),
+                                        TextFieldBuilder.create().build())
+                                .alignment(Pos.BASELINE_RIGHT).build())
+                        .left(AccordionBuilder.create()
+                                .panes(
+                                        TitledPaneBuilder.create()
+                                                .text("Referential")
+                                                .content(VBoxBuilder.create()
+                                                        .children(
+                                                                LabelBuilder.create()
+                                                                        .text("Currency")
+                                                                        .onMouseClicked(e -> {
+                                                                            ((BorderPane) stage.getScene().getRoot()).setCenter(currencyController.getView());
+                                                                        }).build(),
+                                                                LabelBuilder.create()
+                                                                        .text("Country")
+                                                                        .onMouseClicked(e -> {
+                                                                            ((BorderPane) stage.getScene().getRoot()).setCenter(countryController.getView());
+                                                                        }).build()
+                                                        ).build()).build(),
+                                        TitledPaneBuilder.create()
+                                                .text("Referential2")
+                                                .onMouseClicked(e -> {
+                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(countryController.getView());
+                                                }).build()).build())
+                        .bottom(statusBar)
+                        .build())
+                .width(800)
+                .height(600).build());
         stage.show();
+
 
         // menu like web
         // skins
@@ -60,7 +93,7 @@ public class JavaFxApp extends Application {
 
     @Override
     public void stop() throws Exception {
-        applicationContext.close();
+        this.applicationContext.close();
     }
 
     public static void main(String[] anArgs) {

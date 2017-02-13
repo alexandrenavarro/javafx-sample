@@ -12,7 +12,6 @@ import java.util.List;
 @FeignClient(url = "https://restcountries.eu", name = "restcountries")
 public interface CountryResource {
 
-
     @RequestMapping(method = RequestMethod.GET, value = "/rest/v1/all")
     List<Country> findCountries();
 
