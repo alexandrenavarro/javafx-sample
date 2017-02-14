@@ -20,6 +20,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by anavarro on 25/12/16.
@@ -35,10 +37,10 @@ public class JavaFxApp extends Application {
     private ConfigurableApplicationContext applicationContext;
     private static String[] args;
 
-    @Autowired
+    @Inject
     private CountryController countryController;
 
-    @Autowired
+    @Inject
     private CurrencyController currencyController;
 
 /*    @Bean
@@ -64,6 +66,7 @@ public class JavaFxApp extends Application {
         final StatusBar statusBar = new StatusBar();
         statusBar.setText("Nothing in progress");
         statusBar.setProgress(1);
+
         stage.setScene(SceneBuilder.create()
                 .root(BorderPaneBuilder.create()
 //                        .top(HBoxBuilder.create()
@@ -104,7 +107,9 @@ public class JavaFxApp extends Application {
                         .build())
                 .width(800)
                 .height(600)
+                //.stylesheets(JavaFxApp.class.getResource("/myStyle.css").toExternalForm())
                 .build());
+
 
         stage.show();
 

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tbee.javafx.scene.layout.MigPane;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class CountryController {
     private final TableView tableView;
     private final Node view;
 
-    @Autowired
+    @Inject
     public CountryController(final CountryResource countryResource) {
         this.countryResource = countryResource;
 
