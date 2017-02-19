@@ -1,14 +1,10 @@
 package com.github.alexandrenavarro.javafxsample;
 
-import javafx.collections.FXCollections;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
+
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.StackPaneBuilder;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.VBoxBuilder;
 import org.controlsfx.control.MaskerPane;
 import org.controlsfx.tools.Borders;
@@ -29,7 +25,11 @@ public class CountryView implements View {
 
         maskerPane = new MaskerPane();
         maskerPane.setVisible(false);
-        button = ButtonBuilder.create().text("Search").build();
+        button = ButtonBuilder.create()
+                .text("Search").build();
+
+
+        TableView t = new TableView();
         tableView = TableViewBuilder.create()
                 .columns(
                         TableColumnBuilder.create()
@@ -42,6 +42,7 @@ public class CountryView implements View {
                                 .text("alpha3Code")
                                 .cellValueFactory(new PropertyValueFactory<>("alpha3Code")).build())
                 //            .items(FXCollections.observableArrayList(countryList))
+
                 .build();
 
         this.view = Borders.wrap(

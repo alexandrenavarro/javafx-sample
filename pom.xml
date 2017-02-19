@@ -71,6 +71,22 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>net.karneim</groupId>
+            <artifactId>pojobuilder</artifactId>
+            <version>3.5.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.karneim</groupId>
+            <artifactId>pojobuilder</artifactId>
+            <version>3.5.0</version>
+            <classifier>annotations</classifier>
+            <scope>provided</scope>
+        </dependency>
+
+
 
         <!-- tests -->
 
