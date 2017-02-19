@@ -14,6 +14,9 @@ import org.controlsfx.tools.Borders;
 import org.springframework.stereotype.Component;
 
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import static java.awt.Color.*;
 
 /**
@@ -22,26 +25,17 @@ import static java.awt.Color.*;
 @Component
 public class CurrencyController {
 
-    private final Node view;
+    private final CurrencyView currencyView;
 
-    public CurrencyController() {
-        view = Borders.wrap(
-                TitledPaneBuilder.create()
-                        .text("Currency")
-                        .content(ListViewBuilder.create()
-                                .items(
-                                        FXCollections.observableArrayList(
-                                                "EUR",
-                                                "USD")).build())
-                        .maxHeight(Integer.MAX_VALUE)
-                        .collapsible(false)
-                        .build())
-                .emptyBorder()
-                .padding(10).build().build();
+    @Inject
+    public CurrencyController(final CurrencyView currencyView) {
+        this.currencyView = currencyView;
     }
 
-    public Node getView() {
-        return view;
+    @PostConstruct
+    public void initialize() {
+        this.currencyView.getListView().setItems(FXCollections.observableArrayList("EUR", "USD", "YEN"));
     }
+
 
 }

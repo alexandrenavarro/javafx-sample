@@ -21,6 +21,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Inject;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -38,21 +40,24 @@ public class JavaFxApp extends Application {
     private static String[] args;
 
     @Inject
-    private CountryController countryController;
+    private CurrencyView currencyView;
 
     @Inject
-    private CurrencyController currencyController;
+    private CountryView countryView;
 
-/*    @Bean
-    public CountryController countryController(final CountryResource aCountryResource) {
-        return new CountryController(aCountryResource);
-    }
+    @Inject
+    private BottomStatusBarView bottomStatusBarView;
+
 
     @Bean
-    public CurrencyController CurrencyController() {
-        return new CurrencyController();
-    }*/
-
+    public ExecutorService executorService() {
+        return Executors.newFixedThreadPool(5, r -> {
+            Thread t = new Thread(r);
+            t.setDaemon(true);
+            return t ;
+        });
+        //return Executors.newCachedThreadPool();
+    }
 
     @Override
     public void init() throws Exception {
@@ -63,9 +68,6 @@ public class JavaFxApp extends Application {
     @Override
     public void start(final Stage stage) {
         setUserAgentStylesheet(STYLESHEET_MODENA);
-        final StatusBar statusBar = new StatusBar();
-        statusBar.setText("Nothing in progress");
-        statusBar.setProgress(1);
 
         stage.setScene(SceneBuilder.create()
                 .root(BorderPaneBuilder.create()
@@ -88,22 +90,22 @@ public class JavaFxApp extends Application {
                                                                         LabelBuilder.create()
                                                                                 .text("Currency")
                                                                                 .onMouseClicked(e -> {
-                                                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(currencyController.getView());
+                                                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(currencyView.getView());
                                                                                 }).build(),
                                                                         LabelBuilder.create()
                                                                                 .text("Country")
                                                                                 .onMouseClicked(e -> {
-                                                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(countryController.getView());
+                                                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(countryView.getView());
                                                                                 }).build()
                                                                 ).build()).build(),
                                                 TitledPaneBuilder.create()
                                                         .text("Referential2")
                                                         .onMouseClicked(e -> {
-                                                            ((BorderPane) stage.getScene().getRoot()).setCenter(countryController.getView());
+                                                            ((BorderPane) stage.getScene().getRoot()).setCenter(countryView.getView());
 
                                                         }).build()).build())
                                 .emptyBorder().padding(10, 0, 10, 0).build().build())
-                        .bottom(statusBar)
+                        .bottom(bottomStatusBarView.getView())
                         .build())
                 .width(800)
                 .height(600)
