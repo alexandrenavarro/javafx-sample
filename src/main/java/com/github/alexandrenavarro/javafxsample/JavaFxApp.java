@@ -1,24 +1,17 @@
 package com.github.alexandrenavarro.javafxsample;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.SceneBuilder;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
-import org.controlsfx.control.StatusBar;
 import org.controlsfx.tools.Borders;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Inject;
 import java.util.concurrent.ExecutorService;
@@ -47,6 +40,9 @@ public class JavaFxApp extends Application {
 
     @Inject
     private BottomStatusBarView bottomStatusBarView;
+
+    @Inject
+    private CustomTreeTableView customTreeTableView;
 
 
     @Bean
@@ -96,6 +92,12 @@ public class JavaFxApp extends Application {
                                                                                 .text("Country")
                                                                                 .onMouseClicked(e -> {
                                                                                     ((BorderPane) stage.getScene().getRoot()).setCenter(countryView.getView());
+                                                                                }).build()
+                                                                        ,
+                                                                        LabelBuilder.create()
+                                                                                .text("CustomTreeTableView")
+                                                                                .onMouseClicked(e -> {
+                                                                                    ((BorderPane) stage.getScene().getRoot()).setCenter(customTreeTableView.getView());
                                                                                 }).build()
                                                                 ).build()).build(),
                                                 TitledPaneBuilder.create()
