@@ -15,7 +15,7 @@ public class ControlFactory {
         return new Button();
     }
 
-    @GeneratePojoBuilder(withSetterNamePattern="*", intoPackage="*.builder", withFactoryMethod="create", withGenerationGap=true)
+/*    @GeneratePojoBuilder(withSetterNamePattern="*", intoPackage="*.builder", withFactoryMethod="create", withGenerationGap=true)
     public static <S> TableView<S> createTableView() {
         return new TableView<S>();
     }
@@ -23,7 +23,7 @@ public class ControlFactory {
     @GeneratePojoBuilder(withSetterNamePattern="*", intoPackage="*.builder", withFactoryMethod="create")
     public static <S, T>  TableColumn<S, T>  createTableColumn() {
         return new TableColumn<S, T> ();
-    }
+    }*/
 
 
 

@@ -1,4 +1,4 @@
-package com.github.alexandrenavarro.javafxsample.visualgrid;
+package com.github.alexandrenavarro.javafxsample.visualgrid.demo;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
