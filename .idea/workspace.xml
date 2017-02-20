@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d502dfe9-1992-4018-a2b4-9a8e13e8dc52" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/AddVisualGridBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/LayoutCstrVisualGridBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/MigPaneVisualGridBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/VisualGridBuilder.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/builder/TableViewBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/AddVisualMigPaneBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/LayoutCstrVisualMigPaneBuilder.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/VisualMigPaneBuilder.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/AddCtrlRowVisualMigPaneBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/AddCtrlRowVisualGridBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/ColumnCstrVisualMigPaneBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/ColumnCstrVisualGridBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/JavaFxAppWithMigPane.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithMigPane.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/JavaFxAppWithVisualMigPaneBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithVisualMigPaneBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/RowCstrVisualMigPaneBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/RowCstrVisualGridBuilder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/builder/ControlFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/builder/ControlFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithVisualMigPaneBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithVisualMigPaneBuilder.java" />
     </list>
     <list id="01b90419-bcd5-4399-bdb4-a685a7fab926" name="Migration to View" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -53,8 +40,8 @@
       <file leaf-file-name="JavaFxAppWithVisualMigPaneBuilder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithVisualMigPaneBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+            <state relative-caret-position="576">
+              <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -318,6 +305,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javafx-sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javafx-sample" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javafxsample" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -717,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487543022401</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add MigPaneVisualGridBuilder">
+      <created>1487631374924</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1487631374924</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -767,7 +791,8 @@
     <MESSAGE value="Add css" />
     <MESSAGE value="Add Task sample" />
     <MESSAGE value="Add CustomTreeTableView" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add CustomTreeTableView" />
+    <MESSAGE value="Add MigPaneVisualGridBuilder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add MigPaneVisualGridBuilder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -844,7 +869,7 @@
         <state relative-caret-position="162">
           <caret line="9" column="19" lean-forward="false" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -864,7 +889,7 @@
         <state relative-caret-position="450">
           <caret line="28" column="208" lean-forward="false" selection-start-line="28" selection-start-column="208" selection-end-line="28" selection-end-column="208" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -935,7 +960,7 @@
         <state relative-caret-position="396">
           <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -945,7 +970,7 @@
         <state relative-caret-position="594">
           <caret line="35" column="8" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1024,7 +1049,7 @@
         <state relative-caret-position="180">
           <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1184,8 +1209,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/alexandrenavarro/javafxsample/visualgrid/demo/JavaFxAppWithVisualMigPaneBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="7" column="44" lean-forward="true" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+        <state relative-caret-position="576">
+          <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -44,10 +44,7 @@ public class JavaFxAppWithVisualMigPaneBuilder extends Application {
                 .addCtrlRow("okButton       cancelButton      ")
                 .build();
 
-
-
         primaryStage.setScene(new Scene(migPane, 600, 400));
-
         primaryStage.show();
     }
 
