@@ -7,5 +7,6 @@ import javafx.scene.Node;
  */
 public interface AddVisualGridBuilder<C, L> extends LayoutCstrVisualGridBuilder<L> {
 
-    public AddVisualGridBuilder<C, L> add(final C component);
+    AddVisualGridBuilder<C, L> add(final C component);
+
 }

@@ -1,7 +1,7 @@
-package com.github.alexandrenavarro.javafxsample.visualgrid;
+package com.github.alexandrenavarro.javafxsample.visualgrid.javafx.migpane;
 
+import com.github.alexandrenavarro.javafxsample.visualgrid.*;
 import javafx.scene.Node;
-import javafx.scene.control.ButtonBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.tbee.javafx.scene.layout.MigPane;
 
@@ -17,15 +17,57 @@ import java.util.Map;
 public class MigPaneVisualGridBuilder implements VisualGridBuilder<Node, MigPane> {
 
     private final Map<String, Node> nodeMap = new HashMap<>();
-    private String layoutCstr = "";
-    private String columnCstr = "";
-    private String rowCstr = "";
-    private final List<String> ctrlRowList = new ArrayList<>();
-    private final List<String> specificRowCstrList = new ArrayList<>();
 
     public static AddVisualGridBuilder<Node, MigPane> create() {
         return new MigPaneVisualGridBuilder();
     }
+
+
+    protected final List<String> ctrlRowList = new ArrayList<String>();
+    protected final List<String> specificRowCstrList = new ArrayList<>();
+    protected String layoutCstr = "";
+    protected String columnCstr = "";
+    protected String rowCstr = "";
+
+    public LayoutCstrVisualGridBuilder<MigPane> layoutCstr(final String aLayoutCstr) {
+        if (aLayoutCstr != null) {
+            this.layoutCstr = aLayoutCstr;
+        }
+        return this;
+    }
+
+    public RowCstrVisualGridBuilder<MigPane> rowCstr(final String aRowCstr) {
+        if (aRowCstr != null) {
+            this.rowCstr = aRowCstr;
+        }
+        return this;
+    }
+
+    public AddCtrlRowVisualGridBuilder<MigPane> columnCstr(final String aColumnCstr) {
+        if (aColumnCstr != null) {
+            this.columnCstr = aColumnCstr;
+        }
+        return this;
+    }
+
+    public AddCtrlRowVisualGridBuilder<MigPane> addCtrlRow(final String aCtrlRow) {
+        return addCtrlRow(aCtrlRow, "");
+    }
+
+    public AddCtrlRowVisualGridBuilder<MigPane> addCtrlRow(final String aCtrlRow, final String specificRowCstr) {
+        if (aCtrlRow != null) {
+            ctrlRowList.add(aCtrlRow);
+            if (specificRowCstr != null) {
+                specificRowCstrList.add(specificRowCstr);
+            } else {
+                specificRowCstrList.add("");
+            }
+        } else {
+            throw new IllegalArgumentException("ctrlRow must not be null");
+        }
+        return this;
+    }
+
 
     @Override
     public AddVisualGridBuilder<Node, MigPane> add(final Node node) {
@@ -38,51 +80,14 @@ public class MigPaneVisualGridBuilder implements VisualGridBuilder<Node, MigPane
     }
 
     @Override
-    public LayoutCstrVisualGridBuilder layoutCstr(final String aLayoutCstr) {
-        if (aLayoutCstr != null) {
-            this.layoutCstr = aLayoutCstr;
-        }
-        return this;
-    }
-
-    @Override
-    public RowCstrVisualGridBuilder rowCstr(final String aRowCstr) {
-        if (aRowCstr != null) {
-            this.rowCstr = aRowCstr;
-        }
-        return this;
-    }
-
-
-    @Override
-    public AddCtrlRowVisualGridBuilder<MigPane> columnCstr(final String aColumnCstr) {
-        if (aColumnCstr != null) {
-            this.columnCstr = aColumnCstr;
-        }
-        return this;
-    }
-
-    @Override
-    public AddCtrlRowVisualGridBuilder addCtrlRow(final String aCtrlRow) {
-        return addCtrlRow(aCtrlRow, "");
-    }
-
-    @Override
-    public AddCtrlRowVisualGridBuilder addCtrlRow(final String aCtrlRow, final String specificRowCstr) {
-        ctrlRowList.add(aCtrlRow);
-        specificRowCstrList.add(specificRowCstr);
-        return this;
-    }
-
-    @Override
     public MigPane build() {
-        final MigPane migPane = new MigPane(layoutCstr, columnCstr, rowCstr);
-        for (final String row : ctrlRowList) {
+        final MigPane migPane = new MigPane(this.layoutCstr, this.columnCstr, this.rowCstr);
+        for (final String row : this.ctrlRowList) {
             final String[] components = row.split(" +");
             for (int i = 0; i < components.length; i++) {
                 final StringBuilder constraint = new StringBuilder();
 
-                final Node node = nodeMap.get(components[i]);
+                final Node node = this.nodeMap.get(components[i]);
                 if (node != null) {
                     if ((i == components.length - 1)) {
                         constraint.append("wrap ");

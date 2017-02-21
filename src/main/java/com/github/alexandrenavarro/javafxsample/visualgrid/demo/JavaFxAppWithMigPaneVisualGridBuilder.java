@@ -1,6 +1,6 @@
 package com.github.alexandrenavarro.javafxsample.visualgrid.demo;
 
-import com.github.alexandrenavarro.javafxsample.visualgrid.MigPaneVisualGridBuilder;
+import com.github.alexandrenavarro.javafxsample.visualgrid.javafx.migpane.MigPaneVisualGridBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,7 +12,7 @@ import org.tbee.javafx.scene.layout.MigPane;
  * Created by anavarro on 25/12/16.
  */
 
-public class JavaFxAppWithVisualMigPaneBuilder extends Application {
+public class JavaFxAppWithMigPaneVisualGridBuilder extends Application {
 
     @Override
     public void start(final Stage primaryStage) {

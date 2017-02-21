@@ -5,5 +5,5 @@ package com.github.alexandrenavarro.javafxsample.visualgrid;
  */
 public interface LayoutCstrVisualGridBuilder<L> extends RowCstrVisualGridBuilder<L> {
 
-    public RowCstrVisualGridBuilder<L> layoutCstr(final String alayoutCstr);
+    RowCstrVisualGridBuilder<L> layoutCstr(final String alayoutCstr);
 }
