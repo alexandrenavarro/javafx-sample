@@ -38,10 +38,10 @@ public class JavaFxAppWithMigPaneVisualGridBuilder extends Application {
                 .add(ButtonBuilder.create()
                         .id("cancelButton")
                         .text("Cancel").build())
-                .columnCstr("[right]        [fill]            ")
-                .addCtrlRow("firstNameLabel firstNameTextField")
-                .addCtrlRow("lastNameLabel  lastNameTextField ")
-                .addCtrlRow("okButton       cancelButton      ")
+                .columnCstr("[right,100:100:10000,grow,fill] [fill]            ")
+                .addCtrlRow("firstNameLabel                  firstNameTextField")
+                .addCtrlRow("lastNameLabel                   lastNameTextField ")
+                .addCtrlRow("okButton                        cancelButton      ")
                 .build();
 
         primaryStage.setScene(new Scene(migPane, 600, 400));

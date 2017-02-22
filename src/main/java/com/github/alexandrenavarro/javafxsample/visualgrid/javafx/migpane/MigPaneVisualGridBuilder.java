@@ -1,6 +1,7 @@
 package com.github.alexandrenavarro.javafxsample.visualgrid.javafx.migpane;
 
 import com.github.alexandrenavarro.javafxsample.visualgrid.*;
+import com.github.alexandrenavarro.javafxsample.visualgrid.core.AbstractVisualGridBuilder;
 import javafx.scene.Node;
 import lombok.extern.slf4j.Slf4j;
 import org.tbee.javafx.scene.layout.MigPane;
@@ -14,7 +15,7 @@ import java.util.Map;
  * Created by anavarro on 20/02/17.
  */
 @Slf4j
-public class MigPaneVisualGridBuilder implements VisualGridBuilder<Node, MigPane> {
+public class MigPaneVisualGridBuilder extends AbstractVisualGridBuilder<MigPane> implements VisualGridBuilder<Node, MigPane> {
 
     private final Map<String, Node> nodeMap = new HashMap<>();
 
@@ -22,51 +23,6 @@ public class MigPaneVisualGridBuilder implements VisualGridBuilder<Node, MigPane
         return new MigPaneVisualGridBuilder();
     }
 
-
-    protected final List<String> ctrlRowList = new ArrayList<String>();
-    protected final List<String> specificRowCstrList = new ArrayList<>();
-    protected String layoutCstr = "";
-    protected String columnCstr = "";
-    protected String rowCstr = "";
-
-    public LayoutCstrVisualGridBuilder<MigPane> layoutCstr(final String aLayoutCstr) {
-        if (aLayoutCstr != null) {
-            this.layoutCstr = aLayoutCstr;
-        }
-        return this;
-    }
-
-    public RowCstrVisualGridBuilder<MigPane> rowCstr(final String aRowCstr) {
-        if (aRowCstr != null) {
-            this.rowCstr = aRowCstr;
-        }
-        return this;
-    }
-
-    public AddCtrlRowVisualGridBuilder<MigPane> columnCstr(final String aColumnCstr) {
-        if (aColumnCstr != null) {
-            this.columnCstr = aColumnCstr;
-        }
-        return this;
-    }
-
-    public AddCtrlRowVisualGridBuilder<MigPane> addCtrlRow(final String aCtrlRow) {
-        return addCtrlRow(aCtrlRow, "");
-    }
-
-    public AddCtrlRowVisualGridBuilder<MigPane> addCtrlRow(final String aCtrlRow, final String specificRowCstr) {
-        if (aCtrlRow != null) {
-            ctrlRowList.add(aCtrlRow);
-            if (specificRowCstr != null) {
-                specificRowCstrList.add(specificRowCstr);
-            } else {
-                specificRowCstrList.add("");
-            }
-        } else {
-            throw new IllegalArgumentException("ctrlRow must not be null");
-        }
-        return this;
-    }
 
 
     @Override
